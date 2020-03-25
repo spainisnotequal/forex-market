@@ -6,6 +6,9 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+// import routes
+const forexPrices = require("./routes/forexPrices");
+
 // create the Express app
 const app = express();
 
@@ -20,6 +23,9 @@ mongoose
   .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB connected"))
   .catch(error => console.log("MongoDB connection error: ", error));
+
+// use Routes
+app.use("/api/forexPrices", forexPrices);
 
 // configure the port
 const PORT = process.env.PORT || 5000;
