@@ -46,5 +46,14 @@ router.post("/", (req, res) => {
   newForexPrice.save().then(forexPrice => res.json(forexPrice));
 });
 
+// @route        DELETE api/forexPrices/:id
+// @description  Delete a register (date, gold_price, silver_price)
+// @acces        Public
+router.delete("/:id", (req, res) => {
+  ForexPrice.findById(req.params.id)
+    .then(data => data.remove().then(() => res.json({ sucess: true })))
+    .catch(error => res.status(404).json({ sucess: false }));
+});
+
 // export the router
 module.exports = router;
