@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 // @acces        Public
 router.get("/gold", (req, res) => {
   ForexPrice.find()
-    //.select(date gold_price)
+    .select("date gold_price")
     .sort({ date: -1 })
     .then(data => res.json(data));
 });
@@ -30,7 +30,7 @@ router.get("/gold", (req, res) => {
 // @acces        Public
 router.get("/silver", (req, res) => {
   ForexPrice.find()
-    //.select(date silver_price)
+    .select("date silver_price")
     .sort({ date: -1 })
     .then(data => res.json(data));
 });
