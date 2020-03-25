@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // import routes
-const forexPrices = require("./routes/forexPrices");
+const forexPrice = require("./routes/forexPrice");
 
 // create the Express app
 const app = express();
@@ -25,7 +25,7 @@ mongoose
   .catch(error => console.log("MongoDB connection error: ", error));
 
 // use Routes
-app.use("/api/forexPrices", forexPrices);
+app.use("/api/forexPrices", forexPrice);
 
 // configure the port
 const PORT = process.env.PORT || 5000;

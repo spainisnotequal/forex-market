@@ -3,14 +3,14 @@ const express = require("express");
 // create the router
 const router = express.Router();
 
-// import the ForexPrices model
-const ForexPrices = require("../models/ForexPrices");
+// import the ForexPrice model
+const ForexPrice = require("../models/ForexPrice");
 
 // @route        GET api/forexPrices
 // @description  Get all the forex data
 // @acces        Public
 router.get("/", (req, res) => {
-  ForexPrices.find()
+  ForexPrice.find()
     .sort({ date: -1 })
     .then(data => res.json(data));
 });
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 // @description  Get gold prices
 // @acces        Public
 router.get("/gold", (req, res) => {
-  ForexPrices.find()
+  ForexPrice.find()
     //.select(date gold_price)
     .sort({ date: -1 })
     .then(data => res.json(data));
@@ -29,10 +29,21 @@ router.get("/gold", (req, res) => {
 // @description  Get silver prices
 // @acces        Public
 router.get("/silver", (req, res) => {
-  ForexPrices.find()
+  ForexPrice.find()
     //.select(date silver_price)
     .sort({ date: -1 })
     .then(data => res.json(data));
+});
+
+// @route        POST api/forexPrices
+// @description  Create a register (date, gold_price, silver_price)
+// @acces        Public
+router.post("/", (req, res) => {
+  const { date, gold_price, silver_price } = req.body;
+
+  const newForexPrice = new ForexPrice({ date, gold_price, silver_price });
+
+  newForexPrice.save().then(forexPrice => res.json(forexPrice));
 });
 
 // export the router

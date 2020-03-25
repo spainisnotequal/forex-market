@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const ForexPricesSchema = new Schema({
+const ForexPriceSchema = new Schema({
   date: {
     type: Date,
     required: true
@@ -18,4 +18,4 @@ const ForexPricesSchema = new Schema({
 });
 
 // Export the model to be able to import it in other files
-module.exports = ForexPrices = mongoose.model("forexPrices", ForexPricesSchema);
+module.exports = ForexPrice = mongoose.model("forexPrice", ForexPriceSchema);
