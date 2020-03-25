@@ -1,4 +1,10 @@
 const express = require("express");
+const mongoose = require("mongoose");
+
+// in development, load environment variables (for instance, MONGODB_DEV)
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 // create the Express app
 const app = express();
@@ -6,10 +12,14 @@ const app = express();
 // Express JSON parser
 app.use(express.json());
 
-// create a GET route to check if the backend is connected
-app.get("/express_backend", (req, res) => {
-  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
-});
+// MongoDB configuration
+const mongoDB = process.env.MONGODB_URI || process.env.MONGODB_DEV;
+
+// connect to the database
+mongoose
+  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch(error => console.log("MongoDB connection error: ", error));
 
 // configure the port
 const PORT = process.env.PORT || 5000;
