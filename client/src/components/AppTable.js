@@ -1,5 +1,6 @@
 import React from "react";
 import { Table } from "reactstrap";
+import moment from "moment";
 
 const AppTable = props => {
   const data = [
@@ -38,7 +39,7 @@ const AppTable = props => {
 
     return (
       <tr id={_id}>
-        <th scope="row">{date}</th>
+        <th scope="row">{moment(date).format("DD/MM/YYYY")}</th>
         <td>{gold_price}</td>
         <td>{silver_price}</td>
       </tr>
