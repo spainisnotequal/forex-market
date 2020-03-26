@@ -25,8 +25,17 @@ const AppTable = props => {
       __v: 0
     }
   ];
+
+  const dataKeys = Object.keys(data[0]);
+  dataKeys.shift(); // remove the first item of an array (it's the "_id" field from MongoDB)
+  dataKeys.pop(); // remove the last item of an array (it's the "__v" field from MongoDB)
+
+  const headerElements = dataKeys.map(element => <th>{element}</th>);
+  const header = <tr>{headerElements}</tr>;
+
   const rows = data.map(datum => {
     const { _id, date, gold_price, silver_price } = datum;
+
     return (
       <tr id={_id}>
         <th scope="row">{date}</th>
@@ -38,13 +47,7 @@ const AppTable = props => {
 
   return (
     <Table bordered hover>
-      <thead>
-        <tr>
-          <th>Date (dd/mm/yyyy)</th>
-          <th>Gold price ($)</th>
-          <th>Silver price ($)</th>
-        </tr>
-      </thead>
+      <thead>{header}</thead>
       <tbody>{rows}</tbody>
     </Table>
   );
