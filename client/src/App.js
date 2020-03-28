@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-import AppNavbar from "./components/AppNavbar";
-import PageSelector from "./components/PageSelector";
-import AppTable from "./components/AppTable";
-import AppFooter from "./components/AppFooter";
+import HomePage from "./components/HomePage";
+import GoldPage from "./components/GoldPage";
+import SilverPage from "./components/SilverPage";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [data, setData] = useState([]);
-  axios.get("/api/forexPrices").then(res => setData(res.data));
-
   return (
     <div className="App">
-      <AppNavbar />
-      <PageSelector />
-      <AppTable data={data} />
-      <AppFooter />
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/gold" component={GoldPage} />
+        <Route path="/silver" component={SilverPage} />
+      </Switch>
     </div>
   );
 }
